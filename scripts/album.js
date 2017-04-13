@@ -28,6 +28,26 @@ var albumMarconi = {
   ]
  };
 
+var albumRyan = {
+  title: 'My First Album',
+  artist: 'Ryan Kuykendall',
+  label: 'Bloc Records',
+  year: '2017',
+  albumArtUrl: 'assets/images/album_covers/01.png',
+  songs: [
+    { title: 'First Song', duration: '1:01' },
+    { title: 'Second Song', duration: '5:01' },
+    { title: 'Third Song', duration: '3:21'},
+    { title: 'Fourth Song', duration: '3:14' },
+    { title: 'Fifth Song', duration: '2:15'},
+    { title: 'Sixth Song', duration: '3:14' },
+    { title: 'Seventh Song', duration: '2:11' },
+    { title: 'Eighth Song', duration: '1:53' },
+    { title: 'Ninth Song', duration: '6:22' },
+    { title: 'Tenth Song', duration: '8:34' }
+  ]
+ };
+
 function createSongRow(songNumber, songName, songLength) {
   var template =
       '<tr class="album-view-song-item">'
@@ -38,14 +58,16 @@ function createSongRow(songNumber, songName, songLength) {
   return template;
 };
 
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 //just in case the short-hand doesn't work... var setCurrentAlbum = function(album) {
 function setCurrentAlbum(album) {
   // #1
-  var albumTitle = document.getElementsByClassName('album-view-title')[0];
-  var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-  var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-  var albumImage = document.getElementsByClassName('album-cover-art')[0];
-  var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
 
   // #2
   albumTitle.firstChild.nodeValue = album.title;
@@ -65,4 +87,14 @@ function setCurrentAlbum(album) {
 //just in case the short-hand doesn't work... window.onload = function() {
 function window.onload() {
   setCurrentAlbum(albumPicasso);
+
+  var albums = [albumPicasso, albumMarconi, albumRyan];
+  var index = 1;
+  albumImage.addEventListener("click", function(event) {
+    setCurrentAlbum(albums[index]);
+    index++;
+    if(index == albums.length) {
+      index = 0;
+    }
+  });
 };
